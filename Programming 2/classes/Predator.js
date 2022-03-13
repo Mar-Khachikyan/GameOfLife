@@ -1,9 +1,7 @@
-class Predator {
+class Predator extends LivingCreature{
 
     constructor(x, y, id) {
-        this.x = x;
-        this.y = y;
-        this.id = id;
+        super(x,y,id);
         this.energy = 8;
         this.getNewCoordinates();
     }

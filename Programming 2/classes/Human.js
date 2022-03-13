@@ -1,8 +1,6 @@
-class Human {
+class Human extends LivingCreature{
     constructor(x, y, id) {
-        this.x = x;
-        this.y = y;
-        this.id = id;
+        super(x,y,id);
         this.energy = 12;
         this.getNewCoordinates();
     }
@@ -32,6 +30,7 @@ class Human {
         }
         return found;
     }
+
 
 
     move() {
