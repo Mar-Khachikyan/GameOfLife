@@ -1,4 +1,4 @@
-class GrassEater extends LivingCreature{
+module.exports = class GrassEater extends LivingCreature{
     constructor(x, y, id) {
         super(x,y,id);
         this.energy = 8;

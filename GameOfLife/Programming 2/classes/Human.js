@@ -1,4 +1,4 @@
-class Human extends LivingCreature{
+module.exports = class Human extends LivingCreature{
     constructor(x, y, id) {
         super(x,y,id);
         this.energy = 12;

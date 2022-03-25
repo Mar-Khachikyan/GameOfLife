@@ -1,4 +1,4 @@
-class Bomb extends LivingCreature{
+module.exports = class Bomb extends LivingCreature{
 
     constructor(x, y, id) {
         super(x,y,id);
