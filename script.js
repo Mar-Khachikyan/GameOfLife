@@ -2,12 +2,12 @@ var side = 20;
 var socket = io()
 
 function setup() {
-    creatObjects();
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    
+    createCanvas(50* side, 50 * side);
     background('#acacac');
  }
 
-function draw() {
+function drawing(matrix) {
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -21,7 +21,7 @@ function draw() {
             } else if (matrix[y][x] == 4) {
                 fill("black")
             } else if (matrix[y][x] == 5) {
-                 fill(245, 220, 215);
+                 fill(240, 203, 142);
             } else {
                 fill("grey");
             }
@@ -31,5 +31,20 @@ function draw() {
     }  
 }
 
-socket.on('send matrix', draw);
+socket.on('send matrix', drawing);
 
+function kill() {
+    socket.emit("kill");
+}
+
+function addGrass() {
+    socket.emit("add grass");
+}
+
+function addGrassEater() {
+    socket.emit("add grassEater");
+}
+
+function winter() {
+    socket.emit("winter");
+}

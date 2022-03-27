@@ -6,8 +6,7 @@ module.exports = class Grass extends LivingCreature{
         this.multiplay++;
 
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
-
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.multiplay >= 8 && newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -20,7 +19,6 @@ module.exports = class Grass extends LivingCreature{
             this.multiplay = 0;
         }
     }
-
 
 
 }

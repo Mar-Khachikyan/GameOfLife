@@ -4,24 +4,10 @@ module.exports = class Human extends LivingCreature{
     constructor(x, y, id) {
         super(x,y,id);
         this.energy = 12;
-        this.getNewCoordinates();
-    }
-
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
 
     chooseCell() {
-        this.getNewCoordinates();
+        this.getNewDirections();
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
@@ -37,7 +23,7 @@ module.exports = class Human extends LivingCreature{
 
     move() {
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
         if (this.energy > 0 && newCell) {
             var newX = newCell[0];

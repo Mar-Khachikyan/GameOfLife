@@ -4,19 +4,24 @@ module.exports = class LivingCreature {
         this.y = y;
         this.multiplay = 0;
         this.id = id;
-        this.directions = [
-           [this.x - 1, this.y - 1],
-           [this.x, this.y - 1],
-           [this.x + 1, this.y - 1],
-           [this.x - 1, this.y],
-           [this.x + 1, this.y],
-           [this.x - 1, this.y + 1],
-           [this.x, this.y + 1],
-           [this.x + 1, this.y + 1]
-       ];
- 
+        this.getNewDirections();
     }
+
+    getNewDirections(){
+		this.directions = [
+			[this.x - 1, this.y - 1],
+			[this.x, this.y - 1],
+			[this.x + 1, this.y - 1],
+			[this.x - 1, this.y],
+			[this.x + 1, this.y],
+			[this.x - 1, this.y + 1],
+			[this.x, this.y + 1],
+			[this.x + 1, this.y + 1]
+		];
+	}
+
     chooseCell(ch) {
+        this.getNewDirections()
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
