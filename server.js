@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 
-server.listen(3000);
+server.listen(3050);
  matrix = [];
 
 var side = 50;
@@ -88,7 +88,7 @@ io.sockets.emit('send matrix', matrix);
         }
         io.sockets.emit('send matrix', matrix);
     }
-    setInterval(game, 3000);
+    setInterval(game, 300);
 
     function kill() {
         grassArr = [];
@@ -130,11 +130,42 @@ io.sockets.emit('send matrix', matrix);
         io.sockets.emit("send matrix", matrix);
     }
 
+    function addPredator() {
+        for (var i = 0; i < 7; i++) {   
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 3
+                predatorArr.push(new Predator(x, y, 3))
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+
+    function addHuman() {
+        for (var i = 0; i < 7; i++) {   
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 5
+                humanArr.push(new Human(x, y, 5))
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+
+    function winter() {
+        io.sockets.emit("send matrix", matrix);
+    }
+
     io.on('connection', function (socket) {
         createObject();
         socket.on("kill", kill);
         socket.on("add grass", addGrass);
         socket.on("add grassEater", addGrassEater);
+        socket.on("add predator", addPredator);
+        socket.on("add human", addHuman);
+        socket.on("winter", winter);
     });
     
     
@@ -143,6 +174,8 @@ io.sockets.emit('send matrix', matrix);
     setInterval(function() {
         statistics.grass = grassArr.length;
         statistics.grassEater = grassEaterArr.length;
+        statistics.predator = predatorArr.length;
+        statistics.human = humanArr.length;
         fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
             console.log("send")
         })
