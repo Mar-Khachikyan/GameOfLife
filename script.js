@@ -1,19 +1,20 @@
 var side = 20;
-var socket = io()
+var socket = io();
 
 function setup() {
 
     createCanvas(50 * side, 50 * side);
-    background('#acacac');
+    background('grey');
 }
 
 function drawing(matrix) {
+  noStroke()
+
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-
             if (matrix[y][x] == 1) {
-                fill("green");
+                fill("black");
             } else if (matrix[y][x] == 2) {
                 fill("yellow");
             } else if (matrix[y][x] == 3) {
@@ -22,11 +23,14 @@ function drawing(matrix) {
                 fill("black")
             } else if (matrix[y][x] == 5) {
                 fill(240, 203, 142);
-            } else {
+            } else if (matrix[y][x] == 6) {
+              fill("purple")
+          }
+             else {
                 fill("grey");
             }
 
-            rect(x * side, y * side, side, side);
+            ellipse(x * side, y * side, side, side);
         }
     }
 }
@@ -46,20 +50,9 @@ function addGrassEater() {
 }
 
 function addPredator() {
-    socket.emit("add Predator");
+    socket.emit("add predator");
 }
 
 function addHuman() {
-    socket.emit("add Human");
-}
-
-function winter() {
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
-                fill("white");
-            }
-        }
-    }
-    socket.emit("winter");
+    socket.emit("add human");
 }
